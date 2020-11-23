@@ -28,7 +28,7 @@ the main body of the message as well as a quote.
 	<li
 		:id="`message_${id}`"
 		ref="message"
-		tabindex="0"
+		tabindex="-1"
 		class="message"
 		:data-message-id="id"
 		:data-seen="seen"
@@ -37,10 +37,10 @@ the main body of the message as well as a quote.
 		:class="{'hover': showActions && !isSystemMessage, 'system' : isSystemMessage}"
 		@keydown.up.prevent="jumpToPrevious"
 		@keydown.down.prevent="jumpToNext"
-		@focus="showActions=true"
-		@blur="showActions=false"
-		@mouseover="showActions=true"
-		@mouseleave="showActions=false">
+		@focus="isFocussed=true"
+		@blur="isFocussed=false"
+		@mouseover="isHovered=true"
+		@mouseleave="isHovered=false">
 		<div
 			:class="{'hover': showActions && !isSystemMessage && !isDeletedMessage, 'system' : isSystemMessage}"
 			class="message-body"
@@ -130,7 +130,9 @@ the main body of the message as well as a quote.
 						class="message-body__main__right__actions"
 						:class="{ 'tall' : isTallEnough }">
 						<Actions
-							v-show="isReplyable">
+							v-show="isReplyable"
+							@focus="isActionFocussed=true"
+							@blur="isActionFocussed=false">
 							<ActionButton
 								icon="icon-reply"
 								@click.stop="handleReply">
@@ -140,7 +142,9 @@ the main body of the message as well as a quote.
 						<Actions
 							v-show="hasActionsMenu"
 							:force-menu="true"
-							container="#content-vue">
+							container="#content-vue"
+							@focus="isActionFocussed=true"
+							@blur="isActionFocussed=false">
 							<ActionButton
 								v-if="isPrivateReplyable"
 								icon="icon-user"
@@ -383,13 +387,15 @@ export default {
 
 	data() {
 		return {
-			showActions: false,
 			// Is tall enough for both actions and date upon hovering
 			isTallEnough: false,
 			showReloadButton: false,
 			isDeleting: false,
 			// whether the message was seen, only used if this was marked as last read message
 			seen: false,
+			isFocussed: false,
+			isHovered: false,
+			isActionFocussed: false,
 		}
 	},
 
@@ -408,6 +414,10 @@ export default {
 
 		hasActionsMenu() {
 			return (this.isPrivateReplyable || this.isReplyable || this.isDeleteable || this.messageActions.length > 0) && !this.isConversationReadOnly
+		},
+
+		showActions() {
+			return (this.isFocussed || this.isHovered || this.isActionFocussed)
 		},
 
 		isConversationReadOnly() {
