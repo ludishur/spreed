@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import Caption from '../../Caption'
+import Caption from '@nextcloud/vue/dist/Components/Caption'
 import CurrentParticipants from './CurrentParticipants/CurrentParticipants'
 import SearchBox from '../../LeftSidebar/SearchBox/SearchBox'
 import debounce from 'debounce'

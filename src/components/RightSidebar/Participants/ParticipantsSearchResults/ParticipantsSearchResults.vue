@@ -85,7 +85,7 @@
 
 <script>
 import ParticipantsList from '../ParticipantsList/ParticipantsList'
-import Caption from '../../../Caption'
+import Caption from '@nextcloud/vue/dist/Components/Caption'
 import Hint from '../../../Hint'
 
 export default {

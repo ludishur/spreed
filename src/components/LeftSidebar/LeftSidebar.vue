@@ -121,7 +121,7 @@
 <script>
 import CancelableRequest from '../../utils/cancelableRequest'
 import AppNavigation from '@nextcloud/vue/dist/Components/AppNavigation'
-import Caption from '../Caption'
+import Caption from '@nextcloud/vue/dist/Components/Caption'
 import ConversationsList from './ConversationsList/ConversationsList'
 import Conversation from './ConversationsList/Conversation'
 import ConversationsOptionsList from '../ConversationsOptionsList'
