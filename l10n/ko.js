@@ -461,7 +461,7 @@ OC.L10N.register(
     "Leave call" : "통화 떠나기",
     "Stay in call" : "통화 대기",
     "Duplicate session" : "중복 세션",
-    "Discuss this file" : "이 파일에 대해 토론",
+    "Discuss this file" : "이 파일에 대해 토론하기",
     "Share this file with others to discuss it" : "다른 사용자와 토론하기 위해 파일 공유",
     "Share this file" : "파일 공유",
     "Join conversation" : "대화 참가",
